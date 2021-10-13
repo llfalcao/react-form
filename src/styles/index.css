@@ -19,6 +19,10 @@ button {
   border: 0;
 }
 
+input::placeholder {
+  color: #999;
+}
+
 /* Remove input arrows */
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -73,6 +77,7 @@ input[type='number'] {
   font-size: 1rem;
   margin-top: 1rem;
   opacity: 0.5;
+  font-weight: 600;
 }
 
 .field-wrapper > input {
@@ -80,6 +85,9 @@ input[type='number'] {
   font-size: 1rem;
   outline: 0;
   margin-top: 0.25rem;
+  background: transparent;
+  border-bottom: 1px solid #999;
+  color: #fff;
 }
 
 .field-saved {

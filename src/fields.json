@@ -18,5 +18,31 @@
       "title": "Phone",
       "placeholder": "Enter your phone"
     }
+  ],
+  "education": [
+    {
+      "id": "school",
+      "type": "text",
+      "title": "School",
+      "placeholder": "Enter your school name"
+    },
+    {
+      "id": "studyTitle",
+      "type": "text",
+      "title": "Field of study",
+      "placeholder": "Enter your field of study"
+    },
+    {
+      "id": "studyStartDate",
+      "type": "date",
+      "title": "Start Date",
+      "placeholder": "MM/DD/YYYY"
+    },
+    {
+      "id": "studyEndDate",
+      "type": "date",
+      "title": "End Date",
+      "placeholder": "MM/DD/YYYY"
+    }
   ]
 }

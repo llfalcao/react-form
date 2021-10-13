@@ -9,6 +9,10 @@ class App extends React.Component {
       name: '',
       email: '',
       phone: '',
+      school: '',
+      studyTitle: '',
+      studyStartDate: '',
+      studyEndDate: '',
       isEditable: true,
     };
     this.handleChange = this.handleChange.bind(this);
@@ -30,20 +34,39 @@ class App extends React.Component {
   }
 
   render() {
-    const { name, email, phone, isEditable } = this.state;
+    const {
+      name,
+      email,
+      phone,
+      school,
+      studyTitle,
+      studyStartDate,
+      studyEndDate,
+      isEditable,
+    } = this.state;
+    const general = [name, email, phone];
+    const education = [school, studyTitle, studyStartDate, studyEndDate];
 
     return (
       <div className="App">
         <Section
           sectionName="General Information"
           fields={fields.general}
-          inputs={[name, email, phone]}
+          inputs={general}
           handleChange={this.handleChange}
           handleSectionSubmit={this.handleSectionSubmit}
           isEditable={isEditable}
           enableEditing={this.enableEditing}
         />
-        <Section sectionName="Education" />
+        <Section
+          sectionName="Education"
+          fields={fields.education}
+          inputs={education}
+          handleChange={this.handleChange}
+          handleSectionSubmit={this.handleSectionSubmit}
+          isEditable={isEditable}
+          enableEditing={this.enableEditing}
+        />
         <Section sectionName="Work Experience" />
       </div>
     );
