@@ -1,0 +1,22 @@
+{
+  "general": [
+    {
+      "id": "name",
+      "type": "text",
+      "title": "Name",
+      "placeholder": "Enter your name"
+    },
+    {
+      "id": "email",
+      "type": "email",
+      "title": "Email",
+      "placeholder": "Enter your email"
+    },
+    {
+      "id": "phone",
+      "type": "number",
+      "title": "Phone",
+      "placeholder": "Enter your phone"
+    }
+  ]
+}

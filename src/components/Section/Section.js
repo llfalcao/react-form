@@ -1,35 +1,63 @@
 import React from 'react';
-import { v4 as uuid_v4 } from 'uuid';
 
 class Section extends React.Component {
   render() {
-    const { name, fields } = this.props;
+    const {
+      sectionName,
+      fields,
+      inputs,
+      isEditable,
+      handleChange,
+      handleSectionSubmit,
+    } = this.props;
+
+    let items = [];
+    if (fields !== undefined) {
+      if (isEditable) {
+        items = fields.map((field, i) => {
+          return (
+            <div className="field-wrapper" key={i}>
+              <label htmlFor={field.id}>{field.title}</label>
+              <input
+                type={field.type}
+                id={field.id}
+                placeholder={field.placeholder}
+                value={inputs[i]}
+                onChange={handleChange}
+              />
+            </div>
+          );
+        });
+      } else {
+        items = fields.map((field, i) => {
+          return (
+            <div className="field-wrapper" key={i}>
+              <label htmlFor={field.id}>{field.title}</label>
+              <div id={field.id}>{inputs[i]}</div>
+            </div>
+          );
+        });
+      }
+    }
 
     return (
       <section className="section">
-        <header className="section-name">{name}</header>
-
-        {fields !== undefined ? (
-          fields.map((field) => {
-            return (
-              <div className="field-wrapper" key={uuid_v4()}>
-                <label htmlFor={field.id}>{field.title}</label>
-                <input type={field.type} id={field.id} />
-              </div>
-            );
-          })
-        ) : (
-          <></>
-        )}
-
-        <div className="buttons">
-          <button className="btn btn-edit" type="button">
-            Edit
-          </button>
-          <button className="btn btn-save" type="submit">
-            Save
-          </button>
-        </div>
+        <header className="section-name">{sectionName}</header>
+        <form onSubmit={handleSectionSubmit}>
+          <div className="section-fields">{items}</div>
+          <div className="buttons">
+            <button className="btn btn-edit" type="button">
+              Edit
+            </button>
+            <button
+              className="btn btn-save"
+              type="submit"
+              onClick={handleSectionSubmit}
+            >
+              Save
+            </button>
+          </div>
+        </form>
       </section>
     );
   }

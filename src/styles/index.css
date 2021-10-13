@@ -14,10 +14,25 @@ body {
   background-color: #282c34;
 }
 
+input,
 button {
   border: 0;
 }
 
+/* Remove input arrows */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+/* Main App */
 .App {
   text-align: center;
   min-height: 100vh;
@@ -29,20 +44,29 @@ button {
   color: white;
 }
 
+/* Section Component */
+.section {
+  width: 800px;
+}
 .section-name {
   background-color: #101112;
-  width: 800px;
   padding: 0.5rem 2rem;
   cursor: default;
   text-align: left;
 }
 
+.section-fields {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+}
+
 .field-wrapper {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
-  width: 40%;
+  width: 90%;
   text-align: left;
-  padding: 0 0.5rem;
+  padding-right: 0.5rem;
 }
 
 .field-wrapper > label {
@@ -52,10 +76,12 @@ button {
 
 .field-wrapper > input {
   padding: 0.3rem 0.5rem;
-  font-size: 1.1rem;
+  font-size: 1rem;
   outline: 0;
+  margin-top: 0.25rem;
 }
 
+/* Buttons for modifying the info */
 .btn {
   display: inline-flex;
   justify-content: center;
@@ -71,6 +97,7 @@ button {
 
 .buttons {
   text-align: right;
+  margin: 1rem 0;
 }
 
 .btn-edit {
