@@ -7,6 +7,7 @@ class Section extends React.Component {
       fields,
       inputs,
       isEditable,
+      enableEditing,
       handleChange,
       handleSectionSubmit,
     } = this.props;
@@ -33,7 +34,7 @@ class Section extends React.Component {
           return (
             <div className="field-wrapper" key={i}>
               <label htmlFor={field.id}>{field.title}</label>
-              <div id={field.id}>{inputs[i]}</div>
+              <div className="field-saved">{inputs[i]}</div>
             </div>
           );
         });
@@ -46,7 +47,11 @@ class Section extends React.Component {
         <form onSubmit={handleSectionSubmit}>
           <div className="section-fields">{items}</div>
           <div className="buttons">
-            <button className="btn btn-edit" type="button">
+            <button
+              className="btn btn-edit"
+              type="button"
+              onClick={enableEditing}
+            >
               Edit
             </button>
             <button

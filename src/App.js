@@ -13,6 +13,7 @@ class App extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSectionSubmit = this.handleSectionSubmit.bind(this);
+    this.enableEditing = this.enableEditing.bind(this);
   }
 
   handleChange(e) {
@@ -22,6 +23,10 @@ class App extends React.Component {
   handleSectionSubmit(e) {
     e.preventDefault();
     this.setState({ isEditable: false });
+  }
+
+  enableEditing() {
+    this.setState({ isEditable: true });
   }
 
   render() {
@@ -36,6 +41,7 @@ class App extends React.Component {
           handleChange={this.handleChange}
           handleSectionSubmit={this.handleSectionSubmit}
           isEditable={isEditable}
+          enableEditing={this.enableEditing}
         />
         <Section sectionName="Education" />
         <Section sectionName="Work Experience" />
