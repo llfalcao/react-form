@@ -71,7 +71,7 @@ input[type='number'] {
 /* Section Component */
 .section {
   width: 100%;
-  margin-top: 0.5rem;
+  margin-top: 0.7rem;
   background: #222735d9;
   box-shadow: 0 1px 4px 2px #080808;
 }

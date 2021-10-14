@@ -5,6 +5,7 @@ class Section extends React.Component {
     super(props);
     this.state = {
       isEditable: true,
+      isFilled: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.toggleEditing = this.toggleEditing.bind(this);
@@ -22,12 +23,16 @@ class Section extends React.Component {
   toggleEditing(e) {
     e.preventDefault();
     const { isEditable } = this.state;
+    const { updateFilledCount } = this.props;
+
     if (isEditable) {
-      const { ...values } = this.state;
-      if (values[e.target.name] === '') return;
-      this.setState({ isEditable: false });
+      this.setState({ isEditable: false, isFilled: true }, () =>
+        updateFilledCount(this.state.isFilled),
+      );
     } else {
-      this.setState({ isEditable: true });
+      this.setState({ isEditable: true, isFilled: false }, () =>
+        updateFilledCount(this.state.isFilled),
+      );
     }
   }
 
