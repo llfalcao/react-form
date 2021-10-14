@@ -2,18 +2,21 @@
   "general": [
     {
       "id": "name",
+      "name": "name",
       "type": "text",
       "title": "Name",
       "placeholder": "Enter your name"
     },
     {
       "id": "email",
+      "name": "email",
       "type": "email",
       "title": "Email",
       "placeholder": "Enter your email"
     },
     {
       "id": "phone",
+      "name": "phone",
       "type": "number",
       "title": "Phone",
       "placeholder": "Enter your phone"
@@ -22,27 +25,70 @@
   "education": [
     {
       "id": "school",
+      "name": "school",
       "type": "text",
       "title": "School",
       "placeholder": "Enter your school name"
     },
     {
-      "id": "studyTitle",
+      "id": "study-title",
+      "name": "study",
       "type": "text",
       "title": "Field of study",
       "placeholder": "Enter your field of study"
     },
     {
-      "id": "studyStartDate",
+      "id": "study-start-date",
+      "name": "studyStartDate",
       "type": "date",
       "title": "Start Date",
       "placeholder": "MM/DD/YYYY"
     },
     {
-      "id": "studyEndDate",
+      "id": "study-end-date",
+      "name": "studyEndDate",
       "type": "date",
       "title": "End Date",
       "placeholder": "MM/DD/YYYY"
+    }
+  ],
+  "work": [
+    {
+      "id": "company-title",
+      "name": "companyTitle",
+      "type": "text",
+      "title": "Company",
+      "placeholder": "Enter your previous company"
+    },
+    {
+      "id": "position-title",
+      "name": "positionTitle",
+      "type": "text",
+      "title": "Position",
+      "placeholder": "Enter your position title"
+    },
+
+    {
+      "id": "work-start-date",
+      "name": "workStartDate",
+      "type": "date",
+      "title": "Start Date",
+      "placeholder": "MM/DD/YYYY"
+    },
+    {
+      "id": "work-end-date",
+      "name": "workEndDate",
+      "type": "date",
+      "title": "End Date",
+      "placeholder": "MM/DD/YYYY",
+      "required": false
+    },
+    {
+      "id": "main-tasks",
+      "name": "mainTasks",
+      "type": "textarea",
+      "title": "Main Tasks",
+      "placeholder": "Describe your main tasks"
     }
   ]
 }

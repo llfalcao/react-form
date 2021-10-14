@@ -1,16 +1,27 @@
 import React from 'react';
 
 class Section extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isEditable: true };
+    this.enableEditing = this.enableEditing.bind(this);
+    this.disableEditing = this.disableEditing.bind(this);
+  }
+
+  enableEditing() {
+    this.setState({ isEditable: true });
+  }
+
+  disableEditing(e) {
+    e.preventDefault();
+    const { inputs } = this.props;
+    if (inputs.name === '') return;
+    this.setState({ isEditable: false });
+  }
+
   render() {
-    const {
-      sectionName,
-      fields,
-      inputs,
-      isEditable,
-      enableEditing,
-      handleChange,
-      handleSectionSubmit,
-    } = this.props;
+    const { sectionName, fields, inputs, handleChange } = this.props;
+    const { isEditable } = this.state;
 
     let items = [];
     if (fields !== undefined) {
@@ -19,13 +30,25 @@ class Section extends React.Component {
           return (
             <div className="field-wrapper" key={i}>
               <label htmlFor={field.id}>{field.title}</label>
-              <input
-                type={field.type}
-                id={field.id}
-                placeholder={field.placeholder}
-                value={inputs[i]}
-                onChange={handleChange}
-              />
+              {field.type === 'textarea' ? (
+                <textarea
+                  id={field.id}
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  value={inputs[i]}
+                  onChange={handleChange}
+                ></textarea>
+              ) : (
+                <input
+                  type={field.type}
+                  id={field.id}
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  value={inputs[i]}
+                  onChange={(e) => handleChange(e, i)}
+                  required
+                />
+              )}
             </div>
           );
         });
@@ -44,21 +67,17 @@ class Section extends React.Component {
     return (
       <section className="section">
         <header className="section-name">{sectionName}</header>
-        <form onSubmit={handleSectionSubmit}>
+        <form onSubmit={this.disableEditing}>
           <div className="section-fields">{items}</div>
           <div className="buttons">
             <button
               className="btn btn-edit"
               type="button"
-              onClick={enableEditing}
+              onClick={this.enableEditing}
             >
               Edit
             </button>
-            <button
-              className="btn btn-save"
-              type="submit"
-              onClick={handleSectionSubmit}
-            >
+            <button className="btn btn-save" type="submit">
               Save
             </button>
           </div>

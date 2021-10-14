@@ -3,34 +3,28 @@ import Section from './components/Section';
 import fields from './fields.json';
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.state = {
       name: '',
       email: '',
       phone: '',
       school: '',
-      studyTitle: '',
+      study: '',
       studyStartDate: '',
       studyEndDate: '',
-      isEditable: true,
+      companyTitle: '',
+      positionTitle: '',
+      mainTasks: '',
+      workStartDate: '',
+      workEndDate: '',
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSectionSubmit = this.handleSectionSubmit.bind(this);
-    this.enableEditing = this.enableEditing.bind(this);
   }
 
   handleChange(e) {
-    this.setState({ [e.target.id]: e.target.value });
-  }
-
-  handleSectionSubmit(e) {
-    e.preventDefault();
-    this.setState({ isEditable: false });
-  }
-
-  enableEditing() {
-    this.setState({ isEditable: true });
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   render() {
@@ -39,35 +33,42 @@ class App extends React.Component {
       email,
       phone,
       school,
-      studyTitle,
+      study,
       studyStartDate,
       studyEndDate,
-      isEditable,
+      companyTitle,
+      positionTitle,
+      mainTasks,
+      workStartDate,
+      workEndDate,
     } = this.state;
-    const general = [name, email, phone];
-    const education = [school, studyTitle, studyStartDate, studyEndDate];
 
     return (
-      <div className="App">
+      <div className="app">
         <Section
           sectionName="General Information"
           fields={fields.general}
-          inputs={general}
+          inputs={[name, email, phone]}
           handleChange={this.handleChange}
-          handleSectionSubmit={this.handleSectionSubmit}
-          isEditable={isEditable}
-          enableEditing={this.enableEditing}
         />
         <Section
           sectionName="Education"
           fields={fields.education}
-          inputs={education}
+          inputs={[school, study, studyStartDate, studyEndDate]}
           handleChange={this.handleChange}
-          handleSectionSubmit={this.handleSectionSubmit}
-          isEditable={isEditable}
-          enableEditing={this.enableEditing}
         />
-        <Section sectionName="Work Experience" />
+        <Section
+          sectionName="Work Experience"
+          fields={fields.work}
+          inputs={[
+            companyTitle,
+            positionTitle,
+            workStartDate,
+            workEndDate,
+            mainTasks,
+          ]}
+          handleChange={this.handleChange}
+        />
       </div>
     );
   }
