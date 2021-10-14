@@ -4,7 +4,8 @@ class Modal extends React.Component {
   render() {
     return (
       <div className="modal">
-        <h1>Thank you! We'll contact you soon.</h1>
+        <p>Thank you!</p>
+        <p>We'll contact you soon.</p>
       </div>
     );
   }

@@ -3,35 +3,37 @@ import React from 'react';
 class Section extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      values: this.initialize(['one', 'two']),
       isEditable: true,
     };
+    this.handleChange = this.handleChange.bind(this);
     this.enableEditing = this.enableEditing.bind(this);
-    this.disableEditing = this.disableEditing.bind(this);
+    this.saveForm = this.saveForm.bind(this);
   }
 
-  initialize(fields) {
-    const values = {};
-    fields.map((key) => (values[key] = ''));
-    return values;
+  componentDidMount() {
+    const { fields } = this.props;
+    fields.map((key) => this.setState({ [key.name]: '' }));
+  }
+
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   enableEditing() {
     this.setState({ isEditable: true });
   }
 
-  disableEditing(e) {
+  saveForm(e) {
     e.preventDefault();
-    const { inputs } = this.props;
-    if (inputs.name === '') return;
+    const { ...values } = this.state;
+    if (values[e.target.name] === '') return;
     this.setState({ isEditable: false });
   }
 
   render() {
-    const { sectionName, fields, inputs, handleChange } = this.props;
-    const { isEditable } = this.state;
+    const { sectionName, fields } = this.props;
+    const { isEditable, ...values } = this.state;
     let items = [];
 
     if (isEditable) {
@@ -44,8 +46,8 @@ class Section extends React.Component {
                 id={field.id}
                 name={field.name}
                 placeholder={field.placeholder}
-                value={inputs[i]}
-                onChange={handleChange}
+                defaultValue={values[field.name]}
+                onChange={this.handleChange}
               ></textarea>
             ) : (
               <input
@@ -53,8 +55,8 @@ class Section extends React.Component {
                 type={field.type}
                 name={field.name}
                 placeholder={field.placeholder}
-                value={inputs[i]}
-                onChange={(e) => handleChange(e, i)}
+                defaultValue={values[field.name]}
+                onChange={this.handleChange}
                 required
               />
             )}
@@ -66,7 +68,7 @@ class Section extends React.Component {
         return (
           <div className="field-wrapper" key={i}>
             <label htmlFor={field.id}>{field.title}</label>
-            <div className="field-saved">{inputs[i]}</div>
+            <div className="field-saved">{values[field.name]}</div>
           </div>
         );
       });
@@ -75,7 +77,7 @@ class Section extends React.Component {
     return (
       <section className="section">
         <header className="section-name">{sectionName}</header>
-        <form onSubmit={this.disableEditing}>
+        <form onSubmit={this.saveForm}>
           <div className="section-fields">{items}</div>
           <div className="buttons">
             <button
