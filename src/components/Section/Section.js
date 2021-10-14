@@ -7,8 +7,7 @@ class Section extends React.Component {
       isEditable: true,
     };
     this.handleChange = this.handleChange.bind(this);
-    this.enableEditing = this.enableEditing.bind(this);
-    this.saveForm = this.saveForm.bind(this);
+    this.toggleEditing = this.toggleEditing.bind(this);
   }
 
   componentDidMount() {
@@ -20,15 +19,16 @@ class Section extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  enableEditing() {
-    this.setState({ isEditable: true });
-  }
-
-  saveForm(e) {
+  toggleEditing(e) {
     e.preventDefault();
-    const { ...values } = this.state;
-    if (values[e.target.name] === '') return;
-    this.setState({ isEditable: false });
+    const { isEditable } = this.state;
+    if (isEditable) {
+      const { ...values } = this.state;
+      if (values[e.target.name] === '') return;
+      this.setState({ isEditable: false });
+    } else {
+      this.setState({ isEditable: true });
+    }
   }
 
   render() {
@@ -77,20 +77,15 @@ class Section extends React.Component {
     return (
       <section className="section">
         <header className="section-name">{sectionName}</header>
-        <form onSubmit={this.saveForm}>
+        <form className="section-form" onSubmit={this.toggleEditing}>
           <div className="section-fields">{items}</div>
-          <div className="buttons">
-            <button
-              className="btn btn-edit"
-              type="button"
-              onClick={this.enableEditing}
-            >
-              Edit
-            </button>
-            <button className="btn btn-save" type="submit">
-              Save
-            </button>
-          </div>
+          <button
+            className="btn btn-toggle-edit"
+            type="submit"
+            onSubmit={this.toggleEditing}
+          >
+            {isEditable ? 'Save' : 'Edit'}
+          </button>
         </form>
       </section>
     );
