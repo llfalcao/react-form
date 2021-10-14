@@ -12,10 +12,8 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(255, 143, 143);
-  background-image: linear-gradient(to top left, transparent 60%, #2b4f73d6),
-    linear-gradient(70deg, #3888f47a 32%, rgba(52, 155, 71, 0.52));
-  background-repeat: no-repeat;
+  background: url('../assets/bg.jpg') no-repeat center/cover, #778799;
+  background-blend-mode: overlay;
 }
 
 h1 {
