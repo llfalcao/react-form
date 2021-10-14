@@ -3,9 +3,19 @@ import React from 'react';
 class Section extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isEditable: true };
+
+    this.state = {
+      values: this.initialize(['one', 'two']),
+      isEditable: true,
+    };
     this.enableEditing = this.enableEditing.bind(this);
     this.disableEditing = this.disableEditing.bind(this);
+  }
+
+  initialize(fields) {
+    const values = {};
+    fields.map((key) => (values[key] = ''));
+    return values;
   }
 
   enableEditing() {
@@ -22,46 +32,44 @@ class Section extends React.Component {
   render() {
     const { sectionName, fields, inputs, handleChange } = this.props;
     const { isEditable } = this.state;
-
     let items = [];
-    if (fields !== undefined) {
-      if (isEditable) {
-        items = fields.map((field, i) => {
-          return (
-            <div className="field-wrapper" key={i}>
-              <label htmlFor={field.id}>{field.title}</label>
-              {field.type === 'textarea' ? (
-                <textarea
-                  id={field.id}
-                  name={field.name}
-                  placeholder={field.placeholder}
-                  value={inputs[i]}
-                  onChange={handleChange}
-                ></textarea>
-              ) : (
-                <input
-                  type={field.type}
-                  id={field.id}
-                  name={field.name}
-                  placeholder={field.placeholder}
-                  value={inputs[i]}
-                  onChange={(e) => handleChange(e, i)}
-                  required
-                />
-              )}
-            </div>
-          );
-        });
-      } else {
-        items = fields.map((field, i) => {
-          return (
-            <div className="field-wrapper" key={i}>
-              <label htmlFor={field.id}>{field.title}</label>
-              <div className="field-saved">{inputs[i]}</div>
-            </div>
-          );
-        });
-      }
+
+    if (isEditable) {
+      items = fields.map((field, i) => {
+        return (
+          <div className="field-wrapper" key={i}>
+            <label htmlFor={field.id}>{field.title}</label>
+            {field.type === 'textarea' ? (
+              <textarea
+                id={field.id}
+                name={field.name}
+                placeholder={field.placeholder}
+                value={inputs[i]}
+                onChange={handleChange}
+              ></textarea>
+            ) : (
+              <input
+                id={field.id}
+                type={field.type}
+                name={field.name}
+                placeholder={field.placeholder}
+                value={inputs[i]}
+                onChange={(e) => handleChange(e, i)}
+                required
+              />
+            )}
+          </div>
+        );
+      });
+    } else {
+      items = fields.map((field, i) => {
+        return (
+          <div className="field-wrapper" key={i}>
+            <label htmlFor={field.id}>{field.title}</label>
+            <div className="field-saved">{inputs[i]}</div>
+          </div>
+        );
+      });
     }
 
     return (
