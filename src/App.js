@@ -33,12 +33,18 @@ class App extends React.Component {
     }
   }
 
-  retrieveInfo(info) {
-    console.log(info);
+  retrieveInfo(newInfo) {
+    if (this.state.info === '') {
+      this.setState({ info: JSON.stringify(newInfo) });
+    } else {
+      const current = JSON.parse(this.state.info);
+      const merged = JSON.stringify({ ...current, ...newInfo });
+      this.setState({ info: merged });
+    }
   }
 
   render() {
-    const { submitted } = this.state;
+    const { submitted, info } = this.state;
 
     return (
       <div className="app">
@@ -47,17 +53,19 @@ class App extends React.Component {
           sectionName="General Information"
           fields={fields.general}
           modCount={this.updateFilledCount}
-          retrieveInfo={this.retrieveInfo}
+          handleSaved={this.retrieveInfo}
         />
         <Section
           sectionName="Education"
           fields={fields.education}
           modCount={this.updateFilledCount}
+          handleSaved={this.retrieveInfo}
         />
         <Section
           sectionName="Work Experience"
           fields={fields.work}
           modCount={this.updateFilledCount}
+          handleSaved={this.retrieveInfo}
         />
         <button className="btn btn-submit" onClick={this.handleSubmit}>
           Submit
@@ -65,7 +73,7 @@ class App extends React.Component {
         {submitted ? (
           <>
             <div className="overlay"></div>
-            <Modal />
+            <Modal fields={fields} info={info} />
           </>
         ) : (
           <></>

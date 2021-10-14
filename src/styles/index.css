@@ -179,7 +179,7 @@ input[type='number'] {
 
 /* Modal after form is submitted */
 .overlay {
-  background: #000000c9;
+  background: #000000de;
   position: fixed;
   left: 0;
   top: 0;
@@ -192,19 +192,40 @@ input[type='number'] {
   top: 50%;
   transform: translateY(-50%);
   margin: auto;
-  width: max-content;
-  font-size: 1rem;
   padding: 2rem;
-  color: #fff;
-  background: linear-gradient(to top right, #222735, #222735);
+  width: 500px;
+  height: 80vh;
+  overflow: scroll;
+  scrollbar-width: none;
+  background-color: #222735;
   border-radius: 0.25rem;
   box-shadow: 0 2px 2px #43527d;
   animation: fade 0.3s forwards;
 }
 
-.modal > p {
+.modal-message {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.modal-message > p {
   font-weight: 500;
   text-shadow: 0 1px 4px #000000;
+}
+
+.submitted-info {
+  text-align: left;
+  font-size: 1rem;
+}
+
+.submitted-info > p {
+  padding: 0.5rem 0;
+  line-height: 1.5;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.modal-field-title {
+  font-weight: 600;
 }
 
 @keyframes fade {

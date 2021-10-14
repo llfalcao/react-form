@@ -22,16 +22,24 @@ class Section extends React.Component {
 
   toggleEditing(e) {
     e.preventDefault();
-    const { isEditable } = this.state;
-    const { updateFilledCount } = this.props;
+    const { isEditable, ...values } = this.state;
+    const { modCount, handleSaved } = this.props;
 
     if (isEditable) {
       this.setState({ isEditable: false, isFilled: true }, () =>
-        updateFilledCount(this.state.isFilled),
+        modCount(this.state.isFilled),
+      );
+      handleSaved(
+        Object.keys(values)
+          .slice(1)
+          .reduce((result, key) => {
+            result[key] = values[key];
+            return result;
+          }, {}),
       );
     } else {
       this.setState({ isEditable: true, isFilled: false }, () =>
-        updateFilledCount(this.state.isFilled),
+        modCount(this.state.isFilled),
       );
     }
   }
