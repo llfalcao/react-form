@@ -17,7 +17,6 @@ class Modal extends React.Component {
             Object.entries(fields).forEach((field) => {
               field[1].filter((item) => {
                 if (item.name === key[0]) {
-                  console.log(item.name);
                   fieldName = item.title;
                 }
                 return item.title;
